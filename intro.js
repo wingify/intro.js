@@ -65,7 +65,9 @@
       /* Precedence of positions, when auto is enabled */
       positionPrecedence: ["bottom", "top", "right", "left"],
       /* Disable an interaction with element? */
-      disableInteraction: false
+      disableInteraction: false,
+      /* Show a "X" at the top right of the helplayer */
+      showCloseX: true
     };
   }
 
@@ -367,7 +369,7 @@
     var referenceLayer = targetElement.querySelector('.introjs-tooltipReferenceLayer');
     if (referenceLayer) {
       referenceLayer.parentNode.removeChild(referenceLayer);
-	}
+  }
     //remove disableInteractionLayer
     var disableInteractionLayer = targetElement.querySelector('.introjs-disableInteraction');
     if (disableInteractionLayer) {
@@ -460,6 +462,7 @@
     var targetOffset = _getOffset(targetElement)
     var tooltipHeight = _getOffset(tooltipLayer).height
     var windowSize = _getWinSize()
+    tooltipLayer.style.position = 'absolute';
     switch (currentTooltipPosition) {
       case 'top':
         tooltipLayer.style.left = '15px';
@@ -501,6 +504,7 @@
 
         tooltipLayer.style.left   = '50%';
         tooltipLayer.style.top    = '50%';
+        tooltipLayer.style.position    = 'fixed';
         tooltipLayer.style.marginLeft = '-' + (tooltipOffset.width / 2)  + 'px';
         tooltipLayer.style.marginTop  = '-' + (tooltipOffset.height / 2) + 'px';
 
@@ -735,8 +739,9 @@
         if (oldHelperNumberLayer != null) {
           oldHelperNumberLayer.innerHTML = targetElement.step;
         }
-        //set current tooltip text
-        oldtooltipLayer.innerHTML = targetElement.intro;
+
+        oldtooltipLayer.innerHTML = $(targetElement.intro).html();
+
         //set the tooltip position
         oldtooltipContainer.style.display = "block";
         _placeTooltip.call(self, targetElement.element, oldtooltipContainer, oldArrowLayer, oldHelperNumberLayer);
@@ -785,7 +790,8 @@
       arrowLayer.className = 'introjs-arrow';
 
       tooltipTextLayer.className = 'introjs-tooltiptext';
-      tooltipTextLayer.innerHTML = targetElement.intro;
+
+      tooltipTextLayer.innerHTML = $(targetElement.intro).html();
 
       bulletsLayer.className = 'introjs-bullets';
 
@@ -832,7 +838,27 @@
         buttonsLayer.style.display = 'none';
       }
 
+      if (this._options.showCloseX) {
+        var closeXLink = document.createElement('a');
+        closeXLink.className = 'modal-box__close-btn icon  icon--16  icon--cross-round';
+        closeXLink.style.top = '4px';
+        closeXLink.style.right = '4px';
+        closeXLink.href = 'javascript:void(0);';
+        closeXLink.onclick = function () {
+          if (self._introItems.length - 1 == self._currentStep && typeof (self._introCompleteCallback) === 'function') {
+            self._introCompleteCallback.call(self);
+          }
+          if (self._introItems.length - 1 != self._currentStep && typeof (self._introExitCallback) === 'function') {
+            self._introExitCallback.call(self);
+          }
+          _exitIntro.call(self, self._targetElement);
+        };
+      }
+
       tooltipLayer.className = 'introjs-tooltip';
+      if (this._options.showCloseX) {
+        tooltipLayer.appendChild(closeXLink);
+      }
       tooltipLayer.appendChild(tooltipTextLayer);
       tooltipLayer.appendChild(bulletsLayer);
       tooltipLayer.appendChild(progressLayer);
