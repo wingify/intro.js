@@ -470,7 +470,7 @@
         arrowLayer.className = 'introjs-arrow bottom';
         break;
       case 'right':
-        tooltipLayer.style.left = (_getOffset(targetElement).width + 20) + 'px';
+        tooltipLayer.style.left = (_getOffset(targetElement).width + 40) + 'px';
         if (targetOffset.top + tooltipHeight > windowSize.height) {
           // In this case, right would have fallen below the bottom of the screen.
           // Modify so that the bottom of the tooltip connects with the target
@@ -492,7 +492,7 @@
         } else {
           arrowLayer.className = 'introjs-arrow right';
         }
-        tooltipLayer.style.right = (targetOffset.width + 20) + 'px';
+        tooltipLayer.style.right = (targetOffset.width + 40) + 'px';
 
 
         break;
@@ -631,17 +631,19 @@
 
       var currentElement  = this._introItems[this._currentStep],
           elementPosition = _getOffset(currentElement.element),
-          widthHeightPadding = 10;
+          widthPadding = 30,
+          heightPadding = 10;
 
       if (currentElement.position == 'floating') {
-        widthHeightPadding = 0;
+        widthPadding = 0;
+        heightPadding = 0;
       }
 
       //set new position to helper layer
-      helperLayer.setAttribute('style', 'width: ' + (elementPosition.width  + widthHeightPadding)  + 'px; ' +
-                                        'height:' + (elementPosition.height + widthHeightPadding)  + 'px; ' +
-                                        'top:'    + (elementPosition.top    - 5)   + 'px;' +
-                                        'left: '  + (elementPosition.left   - 5)   + 'px;');
+      helperLayer.setAttribute('style', 'width: ' + (elementPosition.width  + widthPadding)  + 'px; ' +
+                                        'height:' + (elementPosition.height + heightPadding)  + 'px; ' +
+                                        'top:'    + (elementPosition.top    - (heightPadding/2))   + 'px;' +
+                                        'left: '  + (elementPosition.left   - (widthPadding/2) )   + 'px;');
 
     }
   }
