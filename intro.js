@@ -953,9 +953,9 @@
 
       buttonsLayer.appendChild(skipTooltipButton);
 
-      //in order to prevent displaying next/previous button always
+      buttonsLayer.appendChild(nextTooltipButton);
+      //in order to prevent displaying previous button always
       if (this._introItems.length > 1) {
-        buttonsLayer.appendChild(nextTooltipButton);
         buttonsLayer.appendChild(prevTooltipButton);
       }
 
