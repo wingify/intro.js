@@ -977,20 +977,21 @@
     nextTooltipButton.innerHTML = this._options.nextLabel;
 
     if (this._currentStep == 0 && this._introItems.length > 1) {
-      prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled hidden';
+      // prevTooltipButton.className = 'introjs-button introjs-prevbutton introjs-disabled hidden';
+      prevTooltipButton.className = 'introjs-button introjs-prevbutton float--left';
       prevTooltipButton.tabIndex = '-1';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       skipTooltipButton.innerHTML = this._options.skipLabel;
     } else if (this._introItems.length - 1 == this._currentStep || this._introItems.length == 1) {
       //skipTooltipButton.innerHTML = this._options.doneLabel;
-      prevTooltipButton.className = 'introjs-button introjs-prevbutton';
+      prevTooltipButton.className = 'introjs-button introjs-prevbutton float--left';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       nextTooltipButton.innerHTML = this._options.doneLabel;
 
       //skipTooltipButton.style.display = 'none';
       nextTooltipButton.tabIndex = '-1';
     } else {
-      prevTooltipButton.className = 'introjs-button introjs-prevbutton';
+      prevTooltipButton.className = 'introjs-button introjs-prevbutton float--left';
       nextTooltipButton.className = 'introjs-button introjs-nextbutton';
       skipTooltipButton.innerHTML = this._options.skipLabel;
     }
