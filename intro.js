@@ -479,12 +479,13 @@
     var targetOffset = _getOffset(targetElement)
     var tooltipHeight = _getOffset(tooltipLayer).height
     var windowSize = _getWinSize()
+    var top = this._introItems[this._currentStep].top || 0;
     tooltipLayer.style.position = 'absolute';
 
     switch (currentTooltipPosition) {
       case 'top':
         tooltipLayer.style.left = '15px';
-        tooltipLayer.style.top = '-' + (tooltipHeight + 10) + 'px';
+        tooltipLayer.style.top = '-' + (tooltipHeight + top + 10) + 'px';
         arrowLayer.className = 'introjs-arrow bottom';
         break;
       case 'right':
@@ -498,7 +499,7 @@
           // In this case, right would have fallen below the bottom of the screen.
           // Modify so that the bottom of the tooltip connects with the target
           arrowLayer.className = "introjs-arrow left-bottom";
-          tooltipLayer.style.top = "-" + (tooltipHeight - targetOffset.height - 20) + "px"
+          tooltipLayer.style.top = "-" + (tooltipHeight - targetOffset.height - top - 20) + "px"
         }
         arrowLayer.className = 'introjs-arrow left';
         break;
@@ -510,7 +511,7 @@
         if (targetOffset.top + tooltipHeight > windowSize.height) {
           // In this case, left would have fallen below the bottom of the screen.
           // Modify so that the bottom of the tooltip connects with the target
-          tooltipLayer.style.top = "-" + (tooltipHeight - targetOffset.height - 20) + "px"
+          tooltipLayer.style.top = "-" + (tooltipHeight - targetOffset.height - top - 20) + "px"
           arrowLayer.className = 'introjs-arrow right-bottom';
         } else {
           arrowLayer.className = 'introjs-arrow right';
