@@ -671,11 +671,23 @@
         widthHeightPadding = 0;
       }
 
+      var toolTipPadding = this._introItems[this._currentStep].toolTipPadding;
+
+      if (toolTipPadding && Object.keys(toolTipPadding).length !== 0) {
+        toolTipPadding.top = toolTipPadding.top || 0;
+        toolTipPadding.left = toolTipPadding.left || 0;
+      } else {
+        toolTipPadding = {
+          top: 0,
+          left: 0
+        };
+      }
+
       //set new position to helper layer
       helperLayer.setAttribute('style', 'width: ' + (elementPosition.width  + widthHeightPadding)  + 'px; ' +
-                                        'height:' + (elementPosition.height + widthHeightPadding)  + 'px; ' +
-                                        'top:'    + (elementPosition.top    - definedPadding)   + 'px;' +
-                                        'left: '  + (elementPosition.left   - definedPadding)   + 'px;');
+          'height:' + (elementPosition.height + widthHeightPadding)  + 'px; ' +
+          'top:'    + (elementPosition.top    - definedPadding + toolTipPadding.top)   + 'px;' +
+          'left: '  + (elementPosition.left   - definedPadding + toolTipPadding.left)   + 'px;');
 
     }
   }
