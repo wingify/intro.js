@@ -1,11 +1,6 @@
-# Intro.js
+# Intro.js v2.0
 
 > Better introductions for websites and features with a step-by-step guide for your projects.
-
-## Latest news
-
-Sorry for this long delay on releasing the new version of IntroJS. We are working to merge pull requests and address almost all issues. IntroJS is **still alive** and we will release a new version soon.
-
 
 ## Where to get
 You can obtain your local copy of Intro.js from:
@@ -19,6 +14,12 @@ You can obtain your local copy of Intro.js from:
 **4)** Download it from CDN ([1](http://www.jsdelivr.com/#!intro.js), [2](http://cdnjs.com/#introjs))
 
 
+## Commercial use
+
+Intro.js is a free and open-source library, however, if you are using the library for your business you can subscribe to one of commercial licenses plus support, code review and support by Intro.js team.
+
+See all available plans: http://introjs.com/#commercial
+
 ## How to use
 Intro.js can be added to your site in three simple steps:
 
@@ -26,7 +27,7 @@ Intro.js can be added to your site in three simple steps:
 
 > CDN hosted files are available at [jsDelivr](http://www.jsdelivr.com/#!intro.js) (click Show More) & [cdnjs](http://cdnjs.com/#introjs).
 
-**2)** Add `data-intro` and `data-step` to your HTML elements.
+**2)** Add `data-intro` and `data-step` to your HTML elements. To add hints you should use `data-hint` attribute.
 
 For example:
 
@@ -225,6 +226,84 @@ introJs().refresh();
 
 ----
 
+###introJs.addHints()
+
+To add available hints to the page (using `data-hint` or JSON)
+
+**Available since**: v2.0
+
+**Returns:**
+ - introJs object.
+
+**Example:**
+```javascript
+introJs().addHints();
+````
+
+-----
+
+###introJs.onhintclick(providedCallback)
+
+Invkoes given function when user clicks on one of hints.
+
+**Available since**: v2.0
+
+**Parameters:**
+ - providedCallback : Function
+
+**Returns:**
+ - introJs object.
+
+**Example:**
+```javascript
+introJs().onhintclick(function() {
+  alert("hint clicked");
+});
+````
+
+-----
+
+###introJs.onhintsadded(providedCallback)
+
+Invokes given callback function after adding and rendering all hints.
+
+**Available since**: v2.0
+
+**Parameters:**
+ - providedCallback : Function
+
+**Returns:**
+ - introJs object.
+
+**Example:**
+```javascript
+introJs().onhintsadded(function() {
+  alert("all hints were added");
+});
+````
+
+-----
+
+###introJs.onhintclose(providedCallback)
+
+Set callback for when a single hint removes from page (e.g. when user clicks on "Got it" button)
+
+**Available since**: v2.0
+
+**Parameters:**
+ - providedCallback : Function
+
+**Returns:**
+ - introJs object.
+
+**Example:**
+```javascript
+introJs().onhintclose(function() {
+  alert("hint closed");
+});
+````
+
+-----
 
 ###introJs.oncomplete(providedCallback)
 
@@ -336,7 +415,9 @@ introJs().onafterchange(function(targetElement) {
  - `data-step`: Optionally define the number (priority) of step
  - `data-tooltipClass`: Optionally define a CSS class for tooltip
  - `data-highlightClass`: Optionally append a CSS class to the helperLayer
- - `data-position`: Optionally define the position of tooltip, `top`, `left`, `right`, `bottom`, `bottom-left-aligned` (same as 'bottom'), 'bottom-middle-aligned' and 'bottom-right-aligned'. Default is `bottom`
+ - `data-position`: Optionally define the position of tooltip, `top`, `left`, `right`, `bottom`, `bottom-left-aligned` (same as `bottom`), `bottom-middle-aligned` and `bottom-right-aligned`. Default is `bottom`
+ - `data-hint`: The tooltip text of hint
+ - `data-hintPosition`: Optionally define the position of hint. Options: `top-middle`, `top-left`, `top-right`, `bottom-left`, `bottom-right`, `bottom-middle`. Default: `top-middle`
 
 ###Options:
 
@@ -358,6 +439,9 @@ introJs().onafterchange(function(targetElement) {
  - `scrollToElement`: Auto scroll to highlighted element if it's outside of viewport, `true` or `false`
  - `overlayOpacity`: Adjust the overlay opacity, `Number`
  - `disableInteraction`: Disable an interaction inside element or not, `true` or `false`
+ - `hintPosition`: Hint position. Default: `top-middle`
+ - `hintButtonLabel`: Hint button label. Default: 'Got it'
+
 
 See [setOption](https://github.com/usablica/intro.js/#introjssetoptionoption-value) to see an example.
 
@@ -380,6 +464,11 @@ You can use IntroJS inside your Wordpress, here is a good article by SitePoint: 
 
 Here is a under construction plugin for Wordpress: https://github.com/newoldmedia/intro.js-wordpress
 
+### GWT Wrapper
+GWT wrapper on top of Intro.js
+
+Github: https://github.com/Agnie-Software/gwt-introjs
+
 ## Build
 
 First you should install `nodejs` and `npm`, then first run this command: `npm install` to install all dependencies.
@@ -400,108 +489,7 @@ Want to learn faster and easier? Here we have **Instant IntroJs**, Packt Publish
   <a target='_blank' href="http://www.packtpub.com/create-useful-introductions-for-websites-and-applications-with-introjs-library/book">Buy and Download</a>
 </p>
 
-## Roadmap
-- Provide more examples
-- Add more templates
-
-## Release History
-
- * **v1.0.0** - 2014-10-17
-   - Auto-positioning feature for tooltip box
-   - Add progress-bar to tooltip box
-   - Fix `z-index` issue
-   - Add dark template
-   - Fix bad sizing with Bootstrap 3
-   - Add disable interaction ability
-   - Fix code styling issues and many minor bug fixes
-
- * **v0.9.0** - 2014-05-23
-   - Add IntroJS templates
-   - Add more tooltip positions (bottom-right, bottom-middle, bottom-left)
-   - Fix table `tr` element's issue
-
- * **v0.8.0** - 2014-03-25
-   - Ability to define introductions without focusing on elements
-   - Fix Internet Explorer 8.0 issue
-   - Add `_direction` property
-
- * **v0.7.1** - 2014-03-11
-   - Fix "Too much recursion" issue with Firefox and Internet Explorer.
-
- * **v0.7.0** - 2014-02-07
-   - Add `onafterchange` event
-   - Add scrolling to element option
-   - Add `nextStep` and `previousStep` functions publicly
-   - Add `_cloneObject` method to prevent data overwriting
-   - Fix null elements problem with programmatic definition
-   - Fix issues with single-step introductions
-   - Fix top margin problem on hidden elements
-   - Fix stacking context problem caused by element opacity
-   - Fix call exit() on null elements
-   - Update documentation and add more details on CDN servers and RTL example
-
- * **v0.6.0** - 2013-11-13
-   - Add step bullets with navigating
-   - Add option to hide introduction navigating buttons
-   - Make keyboard navigation optional
-   - Making `data-step` optional with elements
-   - Fix scroll issue when scrolling down to elements bigger than window
-   - Fix Chrome version 30.0.1599.101 issue with hiding step numbers
-   - Fix incorrect calling onExit callback when user clicks on overlay layer
-   - Fix coding styles and improvement in performance
-
- * **v0.5.0** - 2013-07-19
-   - Add CSS class option for tooltips (And tooltip buttons also)
-   - Add RTL version
-   - Ability to add HTML codes in tooltip content
-   - Ability to add DOM object and CSS selector in programmatic API (So you can use jQuery selector engine)
-   - Add `refresh()` method to refresh and order layers manually
-   - Show tooltip buttons only when introduction steps are more than one
-   - Fix `onbeforechange` event bug and pass correct object in parameters
-   - Fix `Null element exception` in some browsers
-   - And add more examples
-
- * **v0.4.0** - 2013-05-20
-   - Add multi-page introduction example
-   - Add programmatic introduction definition
-   - Cooler introduction background!
-   - Remove IE specific css file and embed IE support to main css file (property fallback)
-   - Update introduction position on window resize (Also support tablet/mobile devices rotation)
-   - Disable buttons on the first and start of introduction (Skip and Done button)
-   - Add `onbeforechange` callback
-   - Add `showStepNumbers` option to show/hide step numbers
-   - Add `exitOnEsc` and `exitOnOverlayClick` options
-   - Fix bad tooltip position calculating problem
-   - Fix a bug when using `!important` in element css properties
-   - Fix a bug in `onexit` behavior
-   - Code refactoring
-
- * **v0.3.0** - 2013-03-28
-   - Adding support for CommonJS, RequireJS AMD and Browser Globals.
-   - Add `goToStep` function to go to specific step of introduction.
-   - Add `onchange` callback.
-   - Add `exit` function to exit from introduction.
-   - Adding options with `setOption` and `setOptions` functions.
-   - More IE compatibility.
-   - Fix `min-width` bug with tooltip box.
-   - Code cleanup + Better coding style.
-
- * **v0.2.1** - 2013-03-20
-   - Fix keydown event unbinding bug.
-
- * **v0.2.0** - 2013-03-20
-   - Ability to define tooltip position with `data-position` attribute
-   - Add `onexit` and `oncomplete` callback
-   - Better scrolling functionality
-   - Redesign navigating buttons + add previous button
-   - Fix overlay layer bug in wide monitors
-   - Fix show element for elements with position `absolute` or `relative`
-   - Add `enter` key for navigating in steps
-   - Code refactoring
-
-
- * **v0.1.0** - 2013-03-16
-   - First commit.
+## <a href="https://github.com/usablica/intro.js/blob/master/changelog.md">Release History</a>
 
 ## Author
 **Afshin Mehrabani**
@@ -518,7 +506,9 @@ Want to learn faster and easier? Here we have **Instant IntroJs**, Packt Publish
 - [Stackoverflow](http://stackoverflow.com/questions/tagged/intro.js)
 
 ## License
-> Copyright (C) 2012 Afshin Mehrabani (afshin.meh@gmail.com)
+> Copyright (C) 2012-2016 Afshin Mehrabani (afshin.meh@gmail.com)
+
+Commercial use: http://introjs.com/#commercial
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
