@@ -1126,7 +1126,7 @@ function _getWinSize() {
         currentStep = 0;
       }
 
-      var padding = this._introItems[currentStep].padding || 0;
+      var padding = (this._introItems[currentStep] && this._introItems[currentStep].padding) || 0;
 
 
       var nextStep = this._introItems[currentStep];
