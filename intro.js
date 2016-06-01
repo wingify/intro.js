@@ -1135,11 +1135,11 @@ function _getWinSize() {
       overlayBelowElement = document.createElement('div');
 
       var currentStep = this._currentStep;
-      if (!currentStep || currentStep < 0) {
+      if (!currentStep || currentStep < 0 || !/^\d+$/.test(currentStep)) {
         currentStep = 0;
       }
 
-      var padding = this._introItems[currentStep].padding || 0;
+      var padding = this._introItems[currentStep] && this._introItems[currentStep].padding || 0;
 
 
       var nextStep = this._introItems[currentStep];
