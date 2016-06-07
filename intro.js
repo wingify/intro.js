@@ -1131,6 +1131,10 @@ function _getWinSize() {
 
       var nextStep = this._introItems[currentStep];
 
+      if (!nextStep) {
+        return;
+      }
+
       var rect = nextStep.element.getBoundingClientRect();
 
       overlayLeftToElement.style.left = '0';
