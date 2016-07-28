@@ -1045,11 +1045,14 @@
 
       //Scroll up
       if (top < 0 || targetElement.element.clientHeight > winHeight) {
-        window.scrollBy(0, top - 30); // 30px padding from edge to look nice
+        // window.scrollBy(0, top - 30); // 30px padding from edge to look nice
 
       //Scroll down
       } else {
-        window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
+        if (!preventScroll) {
+          // window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
+        }
+        
       }
     }
 
@@ -1140,7 +1143,8 @@ function _getWinSize() {
       }
 
       var padding = this._introItems[currentStep] && this._introItems[currentStep].padding || 0;
-
+      var fLeft = this._introItems[currentStep] && this._introItems[currentStep].fLeft || 0;
+      var fPadding = this._introItems[currentStep] && this._introItems[currentStep].fPadding || 0;
 
       var nextStep = this._introItems[currentStep];
 
@@ -1156,10 +1160,10 @@ function _getWinSize() {
       overlayAboveElement.style.height = (rect.top + document.body.scrollTop - padding) + 'px';
       overlayAboveElement.style.width = (rect.width + 2*padding) + 'px';
 
-      overlayRightToElement.style.left = (rect.left + rect.width + padding) + 'px';
+      overlayRightToElement.style.left = (rect.left + rect.width + padding + fLeft) + 'px';
       overlayRightToElement.style.top = '0';
       overlayRightToElement.style.height = document.body.scrollHeight + 'px';
-      overlayRightToElement.style.width = (window.innerWidth - (rect.left + rect.width - 10) + padding) + 'px';
+      overlayRightToElement.style.width = (window.innerWidth - (rect.left + rect.width - 10) + padding + fPadding) + 'px';
 
       overlayBelowElement.style.left = (rect.left - padding) + 'px';
       overlayBelowElement.style.top = (rect.top + rect.height + document.body.scrollTop - padding + 5) + 'px';
