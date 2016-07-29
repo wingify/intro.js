@@ -1049,10 +1049,7 @@
 
       //Scroll down
       } else {
-        if (!preventScroll) {
           window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
-        }
-        
       }
     }
 
