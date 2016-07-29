@@ -1157,7 +1157,7 @@ function _getWinSize() {
       var padding = this._introItems[currentStep] && this._introItems[currentStep].padding || 0;
       var fLeft = this._introItems[currentStep] && this._introItems[currentStep].fLeft || 0;
       var fPadding = this._introItems[currentStep] && this._introItems[currentStep].fPadding || 0;
-      self._preventScroll = this._introItems[currentStep] && this._introItems[currentStep].preventScroll || true;
+      self._preventScroll = this._introItems[currentStep] && this._introItems[currentStep].preventScroll || false;
 
       var nextStep = this._introItems[currentStep];
 
