@@ -29,6 +29,8 @@
   function IntroJs(obj) {
     this._targetElement = obj;
 
+    this._preventScroll = false;
+
     this._options = {
       /* Next button label in tooltip box */
       nextLabel: 'Next &rarr;',
@@ -1049,7 +1051,9 @@
 
       //Scroll down
       } else {
-          window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
+          if (!this._preventScroll) {
+            window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
+          }   
       }
     }
 
@@ -1128,6 +1132,7 @@ function _getWinSize() {
    * @param {Object} targetElm
    */
   function _addOverlayLayer(targetElm) {
+    var self = this;
     removeOverlayLayer.call(this, targetElm);
     var overlayLeftToElement = document.createElement('div'),
       overlayAboveElement = document.createElement('div'),
@@ -1142,6 +1147,7 @@ function _getWinSize() {
       var padding = this._introItems[currentStep] && this._introItems[currentStep].padding || 0;
       var fLeft = this._introItems[currentStep] && this._introItems[currentStep].fLeft || 0;
       var fPadding = this._introItems[currentStep] && this._introItems[currentStep].fPadding || 0;
+      self._preventScroll = this._introItems[currentStep] && this._introItems[currentStep].preventScroll || true;
 
       var nextStep = this._introItems[currentStep];
 
