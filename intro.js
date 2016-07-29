@@ -685,8 +685,16 @@
         };
       }
 
+
+      var safariWidth = 0;
+
+      if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1 && navigator.userAgent.indexOf('chrome') === -1) {
+        safariWidth = this._introItems[this._currentStep].sWidth || 0;
+      }
+
+
       //set new position to helper layer
-      helperLayer.setAttribute('style', 'width: ' + (elementPosition.width  + widthHeightPadding)  + 'px; ' +
+      helperLayer.setAttribute('style', 'width: ' + (elementPosition.width  + widthHeightPadding + safariWidth)  + 'px; ' +
           'height:' + (elementPosition.height + widthHeightPadding)  + 'px; ' +
           'top:'    + (elementPosition.top    - definedPadding + toolTipPadding.top)   + 'px;' +
           'left: '  + (elementPosition.left   - definedPadding + toolTipPadding.left)   + 'px;');
@@ -1053,7 +1061,7 @@
       } else {
           if (!this._preventScroll) {
             window.scrollBy(0, bottom + 100); // 70px + 30px padding from edge to look nice
-          }   
+          }
       }
     }
 
