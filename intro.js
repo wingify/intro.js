@@ -688,7 +688,9 @@
 
       var safariWidth = 0;
 
-      if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1 && navigator.userAgent.indexOf('chrome') === -1) {
+      if (navigator.userAgent &&
+        navigator.userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i)[1].toLowerCase() === 'safari'
+      ) {
         safariWidth = this._introItems[this._currentStep].sWidth || 0;
       }
 
